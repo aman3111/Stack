@@ -1,0 +1,36 @@
+Given an array arr[] of integers, for each element in the array, find the nearest smaller element on its left. If there is no such smaller element, return -1
+for that position.
+
+Input: arr[] = [1, 6, 2]
+Output: [-1, 1, 1]
+Explaination: 
+There is no number to the left of 1, so we return -1. 
+After that, the number is 6, and the nearest smaller number on its left is 1. 
+Next, the number is 2, and the nearest smaller number on the left is also 1.
+
+
+JAVA CODE:
+
+
+class Solution {
+    public int[] leftSmaller(int[] arr) {
+        // code here
+        int n = arr.length;
+        int[] res = new int[n];
+        Stack<Integer> stack = new Stack<>();
+        
+        for(int i = 0;i < n;i++){
+            while(!stack.isEmpty() && stack.peek() >= arr[i]){
+                stack.pop();
+            }
+            if(!stack.isEmpty()){
+                res[i] = stack.peek();
+            }
+            else{
+                res[i] = -1;
+            }
+            stack.push(arr[i]);
+        }
+        return res;
+    }
+}
